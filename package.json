@@ -1,0 +1,29 @@
+{
+  "name": "jscomplex",
+  "version": "1.0.0",
+  "description": "jscomplex",
+  "main": "index.js",
+  "scripts": {
+    "jscomplex": "node index.js",
+    "watch": "watch 'npm run jscomplex'",
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jansanchez/jscomplex.git"
+  },
+  "author": "@jansanchez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jansanchez/jscomplex/issues"
+  },
+  "homepage": "https://github.com/jansanchez/jscomplex#readme",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "commander": "^2.9.0",
+    "escomplex": "^2.0.0-alpha"
+  },
+  "devDependencies": {
+    "watch": "^0.17.1"
+  }
+}
