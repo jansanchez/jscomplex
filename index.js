@@ -36,19 +36,48 @@ const options = {
 	trycatch: false,
 	newmi: false,
 	ignoreErrors: false,
-	noCoreSize: false
+	noCoreSize: false,
+	maintainability: 171
+};
+
+const generator = (score, threshold) => {
+	const magnitude = Math.floor(score / (options.maintainability / 10));
+	// console.log(magnitude);
+	const bar = `${symbol.bullet.repeat(magnitude / 2)}  ${score.toFixed(2)}`;
+	const rating = score / threshold;
+	// console.log(rating);
+	let color = 'red';
+	let arrow = symbol.downwards;
+
+	if (rating >= 0.75) {
+		color = 'yellow';
+	}
+	if (rating >= 1) {
+		arrow = symbol.upwards;
+		color = 'green';
+	}
+
+	return {
+		magnitude,
+		bar,
+		rating,
+		color,
+		symbol: arrow
+	};
 };
 
 vinyl.src(['./demo/**/*.js'])
 	.pipe(map((data, callback) => {
 		const code = data.contents.toString('utf8');
 		const result = escomplex.analyse([{path: data.relative, code}], options);
+		const values = generator(result.reports[0].maintainability, options.maintainability);
 
-		console.log(color.green(`${symbol.upwards}  ${result.reports[0].path}  ${(result.reports[0].maintainability.toFixed(2)).slice(-6)}  ${symbol.bullet.repeat(5)}`));
-
-		result.reports[0].functions.forEach(f => {
-			console.log(color.white.dim(`   ${symbol.rightwards} line: ${f.line}, method: ${f.name}, cyclomatic: ${f.cyclomatic}, effort: ${f.halstead.effort.toFixed(2)}, vocabulary: ${f.halstead.vocabulary}`));
-		});
+		console.log(color[values.color](`${values.symbol}  ${result.reports[0].path}  ${values.bar}`));
+		if (values.color === 'red') {
+			result.reports[0].functions.forEach(fn => {
+				console.log(color.white.dim(`   ${symbol.rightwards} line: ${fn.line}, method: ${fn.name}, cyclomatic: ${fn.cyclomatic}, effort: ${fn.halstead.effort.toFixed(2)}, vocabulary: ${fn.halstead.vocabulary}`));
+			});
+		}
 		callback(null, data);
 	}));
 
