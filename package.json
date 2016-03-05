@@ -2,9 +2,27 @@
   "name": "jscomplex",
   "version": "1.0.0",
   "description": "jscomplex",
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "cyclomatic",
+    "complexity",
+    "halstead",
+    "effort",
+    "vocabulary",
+    "volume",
+    "metrics",
+    "javascript",
+    "es6",
+    "esnext",
+    "software",
+    "npm"
+  ],
   "main": "index.js",
   "scripts": {
     "jscomplex": "node index.js",
+    "prewatch": "xo",
     "watch": "watch 'npm run jscomplex'",
     "test": "npm run test"
   },
@@ -12,7 +30,11 @@
     "type": "git",
     "url": "git+https://github.com/jansanchez/jscomplex.git"
   },
-  "author": "@jansanchez",
+  "author": {
+    "name": "jansanchez",
+    "email": "joejansanchez@gmail.com",
+    "url": "http://frontendlabs.io/author/jansanchez"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jansanchez/jscomplex/issues"
@@ -21,9 +43,14 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "commander": "^2.9.0",
-    "escomplex": "^2.0.0-alpha"
+    "escomplex": "^2.0.0-alpha",
+    "esprima": "^2.7.2"
   },
   "devDependencies": {
-    "watch": "^0.17.1"
+    "watch": "^0.17.1",
+    "xo": "^0.12.1"
+  },
+  "xo": {
+    "esnext": true
   }
 }
