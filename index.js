@@ -5,6 +5,7 @@ const color = require('chalk');
 const escomplex = require('escomplex');
 const vinyl = require('vinyl-fs');
 const map = require('map-stream');
+const Buffer = require('buffer').Buffer;
 
 const symbol = {
 	bullet: '\u2022',
@@ -26,7 +27,7 @@ const symbol = {
 	account: '\u2449',
 	bar: '\u2AF4'
 };
-// The Symbols was extracted from http://graphemica.com/
+// Simbolos extraídos desde http://graphemica.com/
 
 const options = {
 	format: 'json',
@@ -46,13 +47,14 @@ const generator = (score, threshold) => {
 	const bar = `${symbol.bullet.repeat(magnitude / 2)}  ${score.toFixed(2)}`;
 	const rating = score / threshold;
 	// console.log(rating);
+	// console.log(threshold);
 	let color = 'red';
 	let arrow = symbol.downwards;
 
-	if (rating >= 0.75) {
+	if (rating >= 0.50) {
 		color = 'yellow';
 	}
-	if (rating >= 1) {
+	if (rating >= 0.80) {
 		arrow = symbol.upwards;
 		color = 'green';
 	}
@@ -66,17 +68,32 @@ const generator = (score, threshold) => {
 	};
 };
 
+const purgeCode = (code) => {
+	let newCode = code;
+	if (code.charAt(0) === '#') {
+		let lines = code.split('\n');
+		lines.splice(0, 1);
+		newCode = lines.join('\n');
+	}
+	return newCode;
+};
+
 vinyl.src(['./demo/**/*.js'])
 	.pipe(map((data, callback) => {
 		const code = data.contents.toString('utf8');
-		const result = escomplex.analyse([{path: data.relative, code}], options);
+		let newCode = purgeCode(code);
+		const result = escomplex.analyse([{path: data.relative, code: newCode}], options);
 		const values = generator(result.reports[0].maintainability, options.maintainability);
 
 		console.log(color[values.color](`${values.symbol}  ${result.reports[0].path}  ${values.bar}`));
+		
 		if (values.color === 'red') {
 			result.reports[0].functions.forEach(fn => {
 				console.log(color.white.dim(`   ${symbol.rightwards} line: ${fn.line}, method: ${fn.name}, cyclomatic: ${fn.cyclomatic}, effort: ${fn.halstead.effort.toFixed(2)}, vocabulary: ${fn.halstead.vocabulary}`));
 			});
+			if (result.reports[0].functions.length === 0) { // if (result.reports[0].aggregate.hasOwnProperty('name')) {
+				console.log(color.white.dim(`   ${symbol.rightwards} line: ${result.reports[0].aggregate.line}, method: ${result.reports[0].aggregate.name}, cyclomatic: ${result.reports[0].aggregate.cyclomatic}, effort: ${result.reports[0].aggregate.halstead.effort.toFixed(2)}, vocabulary: ${result.reports[0].aggregate.halstead.vocabulary}`));
+			};
 		}
 		callback(null, data);
 	}));
