@@ -19,7 +19,10 @@
     "software",
     "npm"
   ],
-  "main": "index.js",
+  "main": "lib/jscomplex.js",
+  "bin": {
+    "jscomplex": "./bin/jscomplex.js"
+  },
   "scripts": {
     "jscomplex": "node index.js",
     "prewatch": "xo",

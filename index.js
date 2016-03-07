@@ -7,50 +7,48 @@ const vinyl = require('vinyl-fs');
 const map = require('map-stream');
 const Buffer = require('buffer').Buffer;
 
-const symbol = {
-	bullet: '\u2022',
-	block: '\u258C',
-	upwards: '\u2191',
-	downwards: '\u2193',
-	rightwards: '\u2192',
-	leftwards: '\u2190',
-	ogham: '\u168F',
-	circle: '\u0E4F',
-	updashed: '\u21E1',
-	downdashed: '\u21E3',
-	rightdashed: '\u21E2',
-	asterisk: '\u066D',
-	pipe: '\u104A',
-	pipe2: '\u2016',
-	separator: '\u10FB',
-	proof: '\u220E',
-	account: '\u2449',
-	bar: '\u2AF4'
-};
-// Simbolos extraídos desde http://graphemica.com/
 
-const options = {
-	format: 'json',
-	logicalor: false,
-	switchcase: false,
-	forin: false,
-	trycatch: false,
-	newmi: false,
-	ignoreErrors: false,
-	noCoreSize: false,
-	maintainability: 171
-};
+import {Symbol} from 'symbol';
+
+class Complex {
+	constructor(path) {
+		this._options = {
+			format: 'json',
+			logicalor: false,
+			switchcase: false,
+			forin: false,
+			trycatch: false,
+			newmi: false,
+			ignoreErrors: false,
+			noCoreSize: false,
+			maintainability: 171
+		};
+		this._path = path;
+	}
+
+	get options() {
+		return this._options;
+	}
+
+	get path() {
+		return this._path;
+	}
+
+
+
+}
+
+const complex = new Complex(['./index.js']);
+const symbol = new Symbol();
+
+console.log(`${symbol.icon(bullet)}`);
 
 const generator = (score, threshold) => {
-	const magnitude = Math.floor(score / (options.maintainability / 10));
-	// console.log(magnitude);
+	const magnitude = Math.floor(score / (complex.options.maintainability / 10));
 	const bar = `${symbol.bullet.repeat(magnitude / 2)}  ${score.toFixed(2)}`;
 	const rating = score / threshold;
-	// console.log(rating);
-	// console.log(threshold);
 	let color = 'red';
 	let arrow = symbol.downwards;
-
 	if (rating >= 0.50) {
 		color = 'yellow';
 	}
@@ -58,7 +56,6 @@ const generator = (score, threshold) => {
 		arrow = symbol.upwards;
 		color = 'green';
 	}
-
 	return {
 		magnitude,
 		bar,
@@ -78,15 +75,15 @@ const purgeCode = (code) => {
 	return newCode;
 };
 
-vinyl.src(['./demo/**/*.js'])
+vinyl.src(['./index.js'])
 	.pipe(map((data, callback) => {
 		const code = data.contents.toString('utf8');
 		let newCode = purgeCode(code);
-		const result = escomplex.analyse([{path: data.relative, code: newCode}], options);
-		const values = generator(result.reports[0].maintainability, options.maintainability);
+		const result = escomplex.analyse([{path: data.relative, code: newCode}], complex.options);
+		const values = generator(result.reports[0].maintainability, complex.options.maintainability);
 
 		console.log(color[values.color](`${values.symbol}  ${result.reports[0].path}  ${values.bar}`));
-		
+
 		if (values.color === 'red') {
 			result.reports[0].functions.forEach(fn => {
 				console.log(color.white.dim(`   ${symbol.rightwards} line: ${fn.line}, method: ${fn.name}, cyclomatic: ${fn.cyclomatic}, effort: ${fn.halstead.effort.toFixed(2)}, vocabulary: ${fn.halstead.vocabulary}`));
