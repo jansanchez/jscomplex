@@ -25,10 +25,14 @@ class Symbol {
 		};
 	}
 
-	get ascii(key) {
-		return this._ascii(key);
+	get ascii() {
+		return this._ascii;
+	}
+
+	getSymbol(symbol) {
+		return this._ascii[symbol];
 	}
 }
 // Simbolos extraídos desde http://graphemica.com/
 
-module.exports.Symbol;
+module.exports = Symbol;
