@@ -9,90 +9,31 @@ jscomplex
 /*
  * Module dependencies.
  */
-var Complex, defaults, dep, dev, options, program, start;
+var Complex, defaults, options, program, start, dep, dev;
 
 program = require('commander');
-
 Complex = require('../lib/jscomplex');
 
 
 /*
  * program configuration.
  */
-
 program.version(require('../package.json').version)
-	.usage('[options]')
-	.option('--dep', 'show only Dependencies.')
-	.option('--dev', 'show only dev Dependencies.');
+	.arguments('path <path>')
+	.action((path) => {
+		var complex = new Complex(path);
+		complex.process();
+	});
 
 program.on('--help', function() {
 	console.log('  Examples:');
 	console.log('');
-	console.log('    # show only dev Dependencies');
-	console.log('    $ jscomplex --dev');
-	console.log('');
-	console.log('    # show only Dependencies');
-	console.log('    $ jscomplex --dep');
+	console.log('    # analize *.js files');
+	console.log('    $ jscomplex');
 	return console.log('');
 });
 
 program.parse(process.argv);
 
 
-/*
- * Program options.
- */
 
-options = {};
-
-options.dev = program.dev || false;
-
-options.dep = program.dep || false;
-
-
-/*
- * Functions.
- */
-
-start = function(options) {
-	var dependencies;
-	if (options) {
-		dependencies = new Complex(options);
-	} else {
-		dependencies = new Complex();
-	}
-	return process.exit();
-};
-
-defaults = function() {
-	return start();
-};
-
-dev = function() {
-	options = {
-		namesOfMyDependencies: ['devDependencies']
-	};
-	start(options);
-};
-
-dep = function() {
-	options = {
-		namesOfMyDependencies: ['dependencies']
-	};
-	start(options);
-};
-
-
-/*
- * Run Functions.
- */
-
-if (options.dev) {
-	dev();
-}
-
-if (options.dep) {
-	dep();
-}
-
-defaults();
