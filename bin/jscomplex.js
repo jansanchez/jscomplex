@@ -13,7 +13,7 @@ var Complex, defaults, dep, dev, options, program, start;
 
 program = require('commander');
 
-Complex = require('../dist/package/lib/jscomplex');
+Complex = require('../index');
 
 
 /*
