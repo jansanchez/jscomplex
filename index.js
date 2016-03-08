@@ -17,13 +17,10 @@ Complex = require('./lib/jscomplex');
 /*
  * Instantiating.
  */
-
 complex = new Complex(['./**/*.js']);
 complex.process();
-
 
 /*
  * Expose library.
  */
-
 module.exports = complex;

@@ -13,14 +13,17 @@ var Complex, defaults, dep, dev, options, program, start;
 
 program = require('commander');
 
-Complex = require('../index');
+Complex = require('../lib/jscomplex');
 
 
 /*
  * program configuration.
  */
 
-program.version(require('../package.json').version).usage('[options]').option('--dep', 'show only Dependencies.').option('--dev', 'show only dev Dependencies.');
+program.version(require('../package.json').version)
+	.usage('[options]')
+	.option('--dep', 'show only Dependencies.')
+	.option('--dev', 'show only dev Dependencies.');
 
 program.on('--help', function() {
 	console.log('  Examples:');
@@ -54,9 +57,9 @@ options.dep = program.dep || false;
 start = function(options) {
 	var dependencies;
 	if (options) {
-		dependencies = new Dependencies(options);
+		dependencies = new Complex(options);
 	} else {
-		dependencies = new Dependencies();
+		dependencies = new Complex();
 	}
 	return process.exit();
 };
