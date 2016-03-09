@@ -29,8 +29,14 @@ program.version(require('../package.json').version)
 program.on('--help', function() {
 	console.log('  Examples:');
 	console.log('');
-	console.log('    # analize *.js files');
-	console.log('    $ jscomplex');
+	console.log('    # Analize all *.js files from "lib" folder');
+	console.log('    $ jscomplex \"\[\'./lib/*.js\'\]\"');
+	console.log('');
+	console.log('    # Analize all *.js files from "lib" and "bin" folder');
+	console.log('    $ jscomplex \"\[\'./lib/*.js\'\, \'./bin/*.js\'\]\"');
+	console.log('');
+	console.log('    # Analize all *.js files');
+	console.log('    $ jscomplex \"\[\'./**/*.js\'\]\"');
 	return console.log('');
 });
 
