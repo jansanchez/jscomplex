@@ -9,19 +9,20 @@ jscomplex
 /*
  * Module dependencies.
  */
-var Complex, defaults, options, program, start, dep, dev;
+var defaults, options, start, dep, dev;
 
-program = require('commander');
-Complex = require('../lib/jscomplex');
-
+const program = require('commander');
+const Complex = require('../lib/jscomplex');
+pathValue = '';
 
 /*
  * program configuration.
  */
 program.version(require('../package.json').version)
-	.arguments('path <path>')
+	.arguments('<path>')
 	.action((path) => {
-		var complex = new Complex(path);
+		pathValue = path;
+		const complex = new Complex(path);
 		complex.process();
 	});
 
@@ -35,5 +36,8 @@ program.on('--help', function() {
 
 program.parse(process.argv);
 
-
+if (pathValue === '') {
+	const complex = new Complex();
+	complex.process();
+}
 

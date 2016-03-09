@@ -10,17 +10,12 @@ index of jscomplex
 /*
  * Module jscomplex.
  */
-var Complex, complex;
-
-Complex = require('./lib/jscomplex');
+const Complex = require('./lib/jscomplex');
 
 /*
- * Instantiating.
+ * Instantiating and running.
  */
-complex = new Complex(['./**/*.js']);
+const complex = new Complex(['./**/*.js']);
 complex.process();
 
-/*
- * Expose library.
- */
-module.exports = complex;
+module.exports = Complex;
