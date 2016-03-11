@@ -27,7 +27,7 @@
     "jscomplex": "node index.js",
     "prewatch": "xo",
     "watch": "watch 'npm run jscomplex'",
-    "test": "npm run test"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -52,6 +52,7 @@
     "vinyl-fs": "^2.4.2"
   },
   "devDependencies": {
+    "ava": "^0.13.0",
     "watch": "^0.17.1",
     "xo": "^0.12.1"
   },
