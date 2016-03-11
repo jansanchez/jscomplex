@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use strict';
 
 /*
 jscomplex
@@ -9,24 +10,43 @@ jscomplex
 /*
  * Module dependencies.
  */
-var defaults, options, start, dep, dev;
-
-const program = require('commander');
+const cli = require('commander');
 const Complex = require('../lib/jscomplex');
-pathValue = '';
+let pathValue = '';
 
 /*
- * program configuration.
+ * cli configuration.
  */
-program.version(require('../package.json').version)
+cli.version(require('../package.json').version)
+	.option('-f, --format <format>', 'specify the output format of the report')
+	.option('-M, --mi <maintainability index>', 'specify the per-module maintainability index threshold', parseFloat)
+	.option('-l, --logicalor', 'disregard operator || as source of cyclomatic complexity')
+	.option('-w, --switchcase', 'disregard switch statements as source of cyclomatic complexity')
+	.option('-i, --forin', 'treat for...in statements as source of cyclomatic complexity')
+	.option('-t, --trycatch', 'treat catch clauses as source of cyclomatic complexity')
+	.option('-n, --newmi', 'use the Microsoft-variant maintainability index (scale of 0 to 100)')
+	.option('-Q, --nocoresize', 'don\'t calculate core size or visibility matrix')
 	.arguments('<path>')
-	.action((path) => {
+	.action((path, options) => {
 		pathValue = path;
-		const complex = new Complex(path);
+
+		options = {
+			format: 'json',
+			logicalor: !cli.logicalor,
+			switchcase: !cli.switchcase,
+			forin: cli.forin || false,
+			trycatch: cli.trycatch || false,
+			newmi: cli.newmi || false,
+			ignoreerrors: cli.ignoreerrors || false,
+			nocoresize: cli.nocoresize || false,
+			maintainability: cli.mi || 171
+		};
+
+		const complex = new Complex(path, options);
 		complex.process();
 	});
 
-program.on('--help', function() {
+cli.on('--help', () => {
 	console.log('  Examples:');
 	console.log('');
 	console.log('    # Analize all *.js files from "lib" folder');
@@ -40,7 +60,7 @@ program.on('--help', function() {
 	return console.log('');
 });
 
-program.parse(process.argv);
+cli.parse(process.argv);
 
 if (pathValue === '') {
 	const complex = new Complex();
