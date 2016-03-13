@@ -36,7 +36,7 @@ Then in a terminal:
 npm run complex
 ```
 
-## Use
+## Or Use from terminal
 
 ```
 jscomplex "['./lib/*.js', './bin/*.js']"
@@ -52,7 +52,7 @@ node version >= 4.0.0
 ```
 jscomplex -h
 ```
-Output
+*Output*
 
 ```bash
   Usage: jscomplex.bin [options] <path>
