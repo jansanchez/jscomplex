@@ -21,12 +21,13 @@
   ],
   "main": "lib/jscomplex.js",
   "bin": {
-    "jscomplex": "./bin/jscomplex.js"
+    "jscomplex": "./bin/jscomplex.bin.js"
   },
   "scripts": {
-    "jscomplex": "node index.js",
-    "prewatch": "xo",
+    "jscomplex": "node ./bin/jscomplex.bin.js \"['index.js', './lib/*.js', './bin/*.js']\"",
+    "lint": "xo index.js test.js ./lib/jscomplex.js ./lib/symbol.js ./bin/jscomplex.bin.js",
     "watch": "watch 'npm run jscomplex'",
+    "pretest": "npm run lint",
     "test": "ava"
   },
   "repository": {
