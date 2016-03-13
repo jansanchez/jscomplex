@@ -1,70 +1,62 @@
-# post-template
-Template for post in [frontendlabs.io](http://frontendlabs.io/)
+# jscomplex
+A Sweet reporter for maintainability index via escomplex
 
-## Clone
+## Installation 
 
 ```
-git clone https://github.com/frontend-labs/post-template.git
+sudo npm install jscomplex -g
 ```
 
-## Dependencies
+## Pre-requisites
 
 ```
 node version >= 4.2.6
 ```
 
-## Install
+## Use
 
 ```
-sudo npm install -d
+jscomplex "['./lib/*.js', './bin/*.js']"
 ```
 
-## Does it work?
 
-### Watch
+
+
+
+## Help
+
+```
+jscomplex -h
+```
+Output
 
 ```bash
-npm run watch
+  Usage: jscomplex.bin [options] <path>
+
+  Options:
+
+    -h, --help                        output usage information
+    -V, --version                     output the version number
+    -f, --format <format>             specify the output format of the report
+    -M, --mi <maintainability index>  specify the per-module maintainability index threshold
+    -l, --logicalor                   disregard operator || as source of cyclomatic complexity
+    -w, --switchcase                  disregard switch statements as source of cyclomatic complexity
+    -i, --forin                       treat for...in statements as source of cyclomatic complexity
+    -t, --trycatch                    treat catch clauses as source of cyclomatic complexity
+    -n, --newmi                       use the Microsoft-variant maintainability index (scale of 0 to 100)
+    -Q, --nocoresize                  don't calculate core size or visibility matrix
+
+  Examples:
+
+    # Analize all *.js files from "lib" folder
+    $ jscomplex "['./lib/*.js']"
+
+    # Analize all *.js files from "lib" and "bin" folder
+    $ jscomplex "['./lib/*.js', './bin/*.js']"
+
+    # Analize all *.js files
+    $ jscomplex "['./**/*.js']"
 ```
-
-### BrowserSync
-
-```bash
-npm run browser
-```
-
-## Ready!
-
-Open *jade/_config.jade* and update it with your post data 
-
-```jade
-- var post = {}
-- post.title           = 'titulo'
-- post.date            = '17 enero, 2016'
-- post.author          = 'Jan Sanchez'
-```
-
-Then open *jade/index.jade* and start making your new post!
-
-```jade
-extends ./jade/_layout.jade
-block post
-	//- aquí empieza el contenido del post
-	h2 titulo de sección
-	p contenido de un parrafo
-	p texto y un enlace 
-		a(href="http://frontendlabs.io/") Frontendlabs.io
-	p texto que contiene el nombre de una 
-		span(class="inline_folder") carpeta de un 
-		span(class="inline_file") archivo y de un 
-		span(class="inline_code") codigo
-	pre(class="prettyprint lang-js")
-		code.
-			var hola = 'ejemplo de string';
-```
-
-
-![it works](themes/general/img/post.png)
 
 
 ## Enjoy it!
