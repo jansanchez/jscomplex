@@ -22,7 +22,7 @@ npm install --save-dev jscomplex
 
 ## How to use
 
-![jscomplex](docs/images/https://raw.githubusercontent.com/jansanchez/jscomplex/master/docs/images/jscomplex.gif)
+![jscomplex](docs/images/jscomplex.gif)
 
 
 
