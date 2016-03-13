@@ -1,16 +1,38 @@
 # jscomplex
 A Sweet reporter for maintainability index via escomplex
 
-## Installation 
+## Pre-requisites
+
+```
+node version >= 4.2.6
+```
+
+## Install Globally 
 
 ```
 sudo npm install jscomplex -g
 ```
 
-## Pre-requisites
+## Install like a development dependency 
 
 ```
-node version >= 4.2.6
+npm install --save-dev jscomplex
+```
+
+## Use it from `npm scripts`
+
+`package.json` 
+
+```json
+"scripts": {
+    "complex": "jscomplex ./js/**/*.js"
+}
+```
+
+Then in a terminal: 
+
+```bash
+npm run complex
 ```
 
 ## Use
@@ -18,8 +40,6 @@ node version >= 4.2.6
 ```
 jscomplex "['./lib/*.js', './bin/*.js']"
 ```
-
-
 
 
 
