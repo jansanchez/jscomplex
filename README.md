@@ -3,9 +3,10 @@ A Sweet reporter for maintainability index via escomplex
 
 ## Pre-requisites
 
-```
 node version >= 4.2.6
-```
+
+![jscomplex basic use](docs/images/jscomplex-basic-use.png)
+
 
 ## Install Globally 
 
