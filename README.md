@@ -20,10 +20,6 @@ npm install --save-dev jscomplex
 
 ![jscomplex](docs/images/jscomplex.gif)
 
-## Pre-requisites
-
-node version >= 4.0.0
-
 ## Use it from `npm scripts`
 
 `package.json` 
@@ -46,6 +42,9 @@ npm run complex
 jscomplex "['./lib/*.js', './bin/*.js']"
 ```
 
+## Pre-requisites
+
+node version >= 4.0.0
 
 
 ## Help
