@@ -1,5 +1,5 @@
 # jscomplex [![NPM version][npm-image]][npm-url]
-A Sweet reporter for maintainability index via escomplex
+A colorful reporter for maintainability index via escomplex
 
 ![jscomplex basic use](docs/images/jscomplex-basic-use.png)
 
