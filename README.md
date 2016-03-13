@@ -1,4 +1,4 @@
-# jscomplex
+# jscomplex [![NPM version][npm-image]][npm-url]
 A Sweet reporter for maintainability index via escomplex
 
 ## Pre-requisites
@@ -87,3 +87,7 @@ Output
 
 
 ## Enjoy it!
+
+
+[npm-image]: http://img.shields.io/npm/v/jscomplex.svg
+[npm-url]: https://www.npmjs.org/package/jscomplex
