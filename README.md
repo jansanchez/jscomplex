@@ -19,6 +19,13 @@ sudo npm install jscomplex -g
 npm install --save-dev jscomplex
 ```
 
+
+## How to use
+
+![jscomplex](docs/images/https://raw.githubusercontent.com/jansanchez/jscomplex/master/docs/images/jscomplex.gif)
+
+
+
 ## Use it from `npm scripts`
 
 `package.json` 
