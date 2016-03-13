@@ -1,10 +1,6 @@
 # jscomplex [![NPM version][npm-image]][npm-url]
 A Sweet reporter for maintainability index via escomplex
 
-## Pre-requisites
-
-node version >= 4.2.6
-
 ![jscomplex basic use](docs/images/jscomplex-basic-use.png)
 
 
@@ -20,12 +16,13 @@ sudo npm install jscomplex -g
 npm install --save-dev jscomplex
 ```
 
-
 ## How to use
 
 ![jscomplex](docs/images/jscomplex.gif)
 
+## Pre-requisites
 
+node version >= 4.0.0
 
 ## Use it from `npm scripts`
 
