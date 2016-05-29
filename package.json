@@ -1,6 +1,6 @@
 {
   "name": "jscomplex",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "jscomplex",
   "engines": {
     "node": ">=4"
