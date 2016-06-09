@@ -13,7 +13,7 @@ const complex = new Complex(null, {maintainability: 200});
 complex.process();
 
 test('Options: format', t => {
-	t.same(complex.options.format, 'json');
+	t.same(complex.options.json, false);
 });
 
 test('Options: logicalor', t => {

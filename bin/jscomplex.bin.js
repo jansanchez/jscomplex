@@ -18,7 +18,7 @@ let pathValue = '';
  * cli configuration.
  */
 cli.version(require('../package.json').version)
-	.option('-f, --format <format>', 'specify the output format of the report')
+	.option('-j, --json', 'specify json as the output format of the report')
 	.option('-M, --mi <maintainability index>', 'specify the per-module maintainability index threshold', parseFloat)
 	.option('-l, --logicalor', 'disregard operator || as source of cyclomatic complexity')
 	.option('-w, --switchcase', 'disregard switch statements as source of cyclomatic complexity')
@@ -31,7 +31,7 @@ cli.version(require('../package.json').version)
 		pathValue = path;
 
 		options = {
-			format: 'json',
+			json: cli.json || false,
 			logicalor: !cli.logicalor,
 			switchcase: !cli.switchcase,
 			forin: cli.forin || false,
@@ -41,9 +41,12 @@ cli.version(require('../package.json').version)
 			nocoresize: cli.nocoresize || false,
 			maintainability: cli.mi || 171
 		};
-
 		const complex = new Complex(path, options);
-		complex.process();
+		complex.process(data => {
+			if (options.json === true) {
+				console.log(data);
+			}
+		});
 	});
 
 cli.on('--help', () => {
@@ -66,4 +69,3 @@ if (pathValue === '') {
 	const complex = new Complex();
 	complex.process();
 }
-

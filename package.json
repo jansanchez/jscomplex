@@ -1,6 +1,6 @@
 {
   "name": "jscomplex",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "jscomplex",
   "engines": {
     "node": ">=4"
@@ -25,6 +25,7 @@
   },
   "scripts": {
     "jscomplex": "node ./bin/jscomplex.bin.js \"['index.js', './lib/*.js', './bin/*.js']\"",
+    "json": "node ./bin/jscomplex.bin.js -j \"['index.js', './lib/*.js', './bin/*.js']\"",
     "lint": "xo index.js test.js ./lib/jscomplex.js ./lib/symbol.js ./bin/jscomplex.bin.js",
     "watch": "watch 'npm run jscomplex'",
     "pretest": "npm run lint",

@@ -4,13 +4,13 @@ A colorful reporter for maintainability index via escomplex
 ![jscomplex basic use](docs/images/jscomplex-basic-use.png)
 
 
-## Install Globally 
+## Install Globally
 
 ```
 sudo npm install jscomplex -g
 ```
 
-## Install like a development dependency 
+## Install like a development dependency
 
 ```
 npm install --save-dev jscomplex
@@ -22,7 +22,7 @@ npm install --save-dev jscomplex
 
 ## Use it from `npm scripts`
 
-`package.json` 
+`package.json`
 
 ```json
 "scripts": {
@@ -30,7 +30,7 @@ npm install --save-dev jscomplex
 }
 ```
 
-Then in a terminal: 
+Then in a terminal:
 
 ```bash
 npm run complex
@@ -55,13 +55,13 @@ jscomplex -h
 *Output*
 
 ```bash
-  Usage: jscomplex.bin [options] <path>
+  Usage: jscomplex [options] <path>
 
   Options:
 
     -h, --help                        output usage information
     -V, --version                     output the version number
-    -f, --format <format>             specify the output format of the report
+    -j, --json                        specify json as the output format of the report
     -M, --mi <maintainability index>  specify the per-module maintainability index threshold
     -l, --logicalor                   disregard operator || as source of cyclomatic complexity
     -w, --switchcase                  disregard switch statements as source of cyclomatic complexity
